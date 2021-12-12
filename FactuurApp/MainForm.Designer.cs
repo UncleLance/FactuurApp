@@ -228,21 +228,21 @@ namespace FactuurApp
             // customerToolStripMenuItem
             // 
             this.customerToolStripMenuItem.Name = "customerToolStripMenuItem";
-            this.customerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.customerToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.customerToolStripMenuItem.Text = "Klant";
             this.customerToolStripMenuItem.Click += new System.EventHandler(this.customerToolStripMenuItem_Click);
             // 
             // invoiceToolStripMenuItem
             // 
             this.invoiceToolStripMenuItem.Name = "invoiceToolStripMenuItem";
-            this.invoiceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.invoiceToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.invoiceToolStripMenuItem.Text = "Factuur";
             this.invoiceToolStripMenuItem.Click += new System.EventHandler(this.invoiceToolStripMenuItem_Click);
             // 
             // taskToolStripMenuItem
             // 
             this.taskToolStripMenuItem.Name = "taskToolStripMenuItem";
-            this.taskToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.taskToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.taskToolStripMenuItem.Text = "Taak";
             this.taskToolStripMenuItem.Click += new System.EventHandler(this.taskToolStripMenuItem_Click);
             // 

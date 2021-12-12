@@ -12,11 +12,13 @@ namespace FactuurApp
 {
     public partial class InvoiceForm : Form
     {
+        private Invoice invoice = new Invoice();
+        
         private List<Customer> customersList = new List<Customer>();
         private List<PaymentMethod> paymentMethodsList = new List<PaymentMethod>();
         private List<Task> tasksList = new List<Task>();
 
-        private Customer selectedCustomer;
+        private Customer customer;
         private DateTime paymentTerm;
         private decimal totalPriceVATExlusive = 0M;
         private decimal priceVAT = 0M;
@@ -25,39 +27,91 @@ namespace FactuurApp
         {
             InitializeComponent();
 
-            Database.MakeConnection();
-
-            if(Database.CheckConnection() == true)
-            {
-                customersList = Database.GetAllCustomers();
-                paymentMethodsList = Database.GetAllMethods();
-                tasksList = Database.GetAllTasks();
-            }
-
-            Database.CloseConnection();
-
             taskDeleteButton.Enabled = false;
             taskSubmitButton.Enabled = false;
-
-            foreach (Customer customer in customersList)
-            {
-                string fullName = customer.Insertion != null ? string.Format("{0} {1} {2}", customer.FirstName, customer.Insertion, customer.LastName) :
-                    string.Format("{0} {1}", customer.FirstName, customer.LastName);
-
-                customersComboBox.Items.Add(string.Format("{0} - {1}", customer.Id, fullName));
-            }
 
             tasksComboBox.DataSource = tasksList;
             tasksComboBox.DisplayMember = "Description";
             tasksComboBox.ValueMember = "Id";
 
             tasksComboBox.SelectedIndex = -1;
+            if(invoice == null)
+            {
+                this.Text = "Nieuw factuur";
+                
+                Database.MakeConnection();
 
-            priceVATExclusiveLabel.Text = "€ 0.00";
-            priceVATLabel.Text = "€ 0.00";
-            priceVATInclusiveLabel.Text = "€ 0.00";
+                if(Database.CheckConnection() == true)
+                {
+                    customersList = Database.GetAllCustomers();
+                    paymentMethodsList = Database.GetAllMethods();
+                    tasksList = Database.GetAllTasks();
+                }
 
-            paymentTermMonthCalendar.TodayDate = DateTime.Now;
+                Database.CloseConnection();
+
+
+                foreach (Customer customer in customersList)
+                {
+                    string fullName = customer.Insertion != null ? string.Format("{0} {1} {2}", customer.FirstName, customer.Insertion, customer.LastName) :
+                        string.Format("{0} {1}", customer.FirstName, customer.LastName);
+
+                    customersComboBox.Items.Add(string.Format("{0} - {1}", customer.Id, fullName));
+                }
+
+
+                priceVATExclusiveLabel.Text = "€ 0.00";
+                priceVATLabel.Text = "€ 0.00";
+                priceVATInclusiveLabel.Text = "€ 0.00";
+
+                paymentTermMonthCalendar.TodayDate = DateTime.Now;
+            }
+            else
+            {
+                this.Text = string.Format("Factuur #{0}", invoice.Id);
+
+                priceVATExclusiveLabel.Text = string.Format("€ {0}", invoice.TotalPrice);
+                priceVATLabel.Text = string.Format("€ {0}", invoice.VATPrice);
+                priceVATInclusiveLabel.Text = string.Format("€ {0}", (invoice.TotalPrice + invoice.VATPrice));
+
+                customer = invoice.Customer;
+                if(customer == null)
+                {
+                    MessageBox.Show("Klant is leeg");
+                    return;
+                }
+
+                string fullName = customer.Insertion != null ? 
+                string.Format("{0} {1} {2}", customer.FirstName, customer.Insertion, customer.LastName) :
+                string.Format("{0} {1}", customer.FirstName, customer.LastName);
+
+                customersComboBox.Text = string.Format("{0} - {1}", customer.Id, fullName);
+                customersComboBox.Enabled = false;
+
+                foreach(InvoiceRule rule in invoice.InvoiceRules)
+                {
+                    invoiceRulesDataGridView.Rows.Add(rule.Amount, rule.Task.Description, rule.Task.Price, rule.Task.Price * rule.Amount);
+                }
+
+                //Cash
+                if(invoice.PaymentMethod.Id == 1)
+                {
+                    cashRadioButton.Checked = true;
+                }
+                //Pin
+                if (invoice.PaymentMethod.Id == 2)
+                {
+                    pinRadioButton.Checked = true;
+                }
+
+
+                paymentTermMonthCalendar.TodayDate = invoice.PaymentTerm;
+            }
+        }
+
+        public void SetInvoice(Invoice Invoice)
+        {
+            invoice = Invoice;
         }
 
         //private void CalculatePrices()
@@ -88,7 +142,7 @@ namespace FactuurApp
 
         private void customersComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedCustomer = customersList.Where(customer => customer.Id == (customersComboBox.SelectedIndex + 1)).First();
+            customer = customersList.Where(customer => customer.Id == (customersComboBox.SelectedIndex + 1)).First();
         }
 
         private void invoiceRulesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)

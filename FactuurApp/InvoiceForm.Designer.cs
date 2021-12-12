@@ -32,10 +32,10 @@ namespace FactuurApp
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.taskAmountNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.taskDeleteButton = new System.Windows.Forms.Button();
             this.taskSubmitButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.tasksComboBox = new System.Windows.Forms.ComboBox();
+            this.taskDeleteButton = new System.Windows.Forms.Button();
             this.priceVATInclusiveLabel = new System.Windows.Forms.Label();
             this.priceVATLabel = new System.Windows.Forms.Label();
             this.priceVATExclusiveLabel = new System.Windows.Forms.Label();
@@ -46,7 +46,6 @@ namespace FactuurApp
             this.customersComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.paymentMethodComboBox = new System.Windows.Forms.ComboBox();
             this.invoiceRulesDataGridView = new System.Windows.Forms.DataGridView();
             this.taskAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taskDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,6 +53,10 @@ namespace FactuurApp
             this.taskPriceTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pinRadioButton = new System.Windows.Forms.RadioButton();
+            this.cashRadioButton = new System.Windows.Forms.RadioButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.taskAmountNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceRulesDataGridView)).BeginInit();
@@ -102,17 +105,6 @@ namespace FactuurApp
             0,
             0});
             // 
-            // taskDeleteButton
-            // 
-            this.taskDeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.taskDeleteButton.Location = new System.Drawing.Point(697, 230);
-            this.taskDeleteButton.Name = "taskDeleteButton";
-            this.taskDeleteButton.Size = new System.Drawing.Size(100, 23);
-            this.taskDeleteButton.TabIndex = 25;
-            this.taskDeleteButton.Text = "Verwijder uit lijst";
-            this.taskDeleteButton.UseVisualStyleBackColor = true;
-            this.taskDeleteButton.Click += new System.EventHandler(this.taskDeleteButton_Click);
-            // 
             // taskSubmitButton
             // 
             this.taskSubmitButton.Location = new System.Drawing.Point(6, 67);
@@ -142,6 +134,17 @@ namespace FactuurApp
             this.tasksComboBox.Size = new System.Drawing.Size(200, 21);
             this.tasksComboBox.TabIndex = 22;
             this.tasksComboBox.SelectedIndexChanged += new System.EventHandler(this.tasksComboBox_SelectedIndexChanged);
+            // 
+            // taskDeleteButton
+            // 
+            this.taskDeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.taskDeleteButton.Location = new System.Drawing.Point(697, 230);
+            this.taskDeleteButton.Name = "taskDeleteButton";
+            this.taskDeleteButton.Size = new System.Drawing.Size(100, 23);
+            this.taskDeleteButton.TabIndex = 25;
+            this.taskDeleteButton.Text = "Verwijder uit lijst";
+            this.taskDeleteButton.UseVisualStyleBackColor = true;
+            this.taskDeleteButton.Click += new System.EventHandler(this.taskDeleteButton_Click);
             // 
             // priceVATInclusiveLabel
             // 
@@ -243,16 +246,6 @@ namespace FactuurApp
             this.label2.TabIndex = 17;
             this.label2.Text = "Betaalwijze:";
             // 
-            // paymentMethodComboBox
-            // 
-            this.paymentMethodComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.paymentMethodComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.paymentMethodComboBox.FormattingEnabled = true;
-            this.paymentMethodComboBox.Location = new System.Drawing.Point(6, 83);
-            this.paymentMethodComboBox.Name = "paymentMethodComboBox";
-            this.paymentMethodComboBox.Size = new System.Drawing.Size(200, 21);
-            this.paymentMethodComboBox.TabIndex = 18;
-            // 
             // invoiceRulesDataGridView
             // 
             this.invoiceRulesDataGridView.AllowUserToAddRows = false;
@@ -304,18 +297,19 @@ namespace FactuurApp
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(215, 16);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 13);
+            this.label3.Size = new System.Drawing.Size(107, 13);
             this.label3.TabIndex = 21;
-            this.label3.Text = "Betaaltermijn:";
+            this.label3.Text = "Uiterste betaaldatum:";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cashRadioButton);
+            this.groupBox2.Controls.Add(this.pinRadioButton);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.customersComboBox);
             this.groupBox2.Controls.Add(this.paymentTermMonthCalendar);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.paymentMethodComboBox);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(461, 212);
@@ -323,11 +317,57 @@ namespace FactuurApp
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Factuur gegevens";
             // 
+            // pinRadioButton
+            // 
+            this.pinRadioButton.AutoSize = true;
+            this.pinRadioButton.Location = new System.Drawing.Point(9, 83);
+            this.pinRadioButton.Name = "pinRadioButton";
+            this.pinRadioButton.Size = new System.Drawing.Size(40, 17);
+            this.pinRadioButton.TabIndex = 22;
+            this.pinRadioButton.TabStop = true;
+            this.pinRadioButton.Text = "Pin";
+            this.pinRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // cashRadioButton
+            // 
+            this.cashRadioButton.AutoSize = true;
+            this.cashRadioButton.Location = new System.Drawing.Point(9, 106);
+            this.cashRadioButton.Name = "cashRadioButton";
+            this.cashRadioButton.Size = new System.Drawing.Size(62, 17);
+            this.cashRadioButton.TabIndex = 23;
+            this.cashRadioButton.TabStop = true;
+            this.cashRadioButton.Text = "Contant";
+            this.cashRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Location = new System.Drawing.Point(692, 697);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(55, 13);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "________";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(753, 692);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(18, 20);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "+";
+            // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(809, 751);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.priceVATInclusiveLabel);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.taskDeleteButton);
@@ -338,8 +378,9 @@ namespace FactuurApp
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
+            this.Controls.Add(this.label6);
             this.Name = "InvoiceForm";
-            this.Text = "Nieuw factuur";
+            this.Text = "<?>";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.taskAmountNumericUpDown)).EndInit();
@@ -363,7 +404,6 @@ namespace FactuurApp
         private System.Windows.Forms.ComboBox customersComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox paymentMethodComboBox;
         private System.Windows.Forms.DataGridView invoiceRulesDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn taskAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn taskDescription;
@@ -377,5 +417,9 @@ namespace FactuurApp
         private System.Windows.Forms.ComboBox tasksComboBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown taskAmountNumericUpDown;
+        private System.Windows.Forms.RadioButton cashRadioButton;
+        private System.Windows.Forms.RadioButton pinRadioButton;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }

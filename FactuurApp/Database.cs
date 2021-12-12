@@ -284,6 +284,7 @@ namespace FactuurApp
 
             return null;
         }
+
         public static void AddCustomer(Customer customer)
         {
             connection.Open();

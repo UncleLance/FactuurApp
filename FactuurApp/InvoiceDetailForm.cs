@@ -70,5 +70,16 @@ namespace FactuurApp
         {
             invoice = Invoice;
         }
+
+        private void editInvoiceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InvoiceForm invoiceForm = new InvoiceForm();
+
+            invoiceForm.SetInvoice(invoice);
+
+            this.Close();
+
+            invoiceForm.ShowDialog();
+        }
     }
 }

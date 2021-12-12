@@ -52,18 +52,22 @@ namespace FactuurApp
             this.taskDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taskPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taskPriceTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.detailInvoiceMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.priceVATExclusiveLabel = new System.Windows.Forms.Label();
             this.priceVATLabel = new System.Windows.Forms.Label();
             this.priceVATInclusiveLabel = new System.Windows.Forms.Label();
+            this.editInvoiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sendInvoiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceRulesDataGridView)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.detailInvoiceMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -288,21 +292,24 @@ namespace FactuurApp
             this.taskPriceTotal.Name = "taskPriceTotal";
             this.taskPriceTotal.ReadOnly = true;
             // 
-            // menuStrip1
+            // detailInvoiceMenuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(751, 24);
-            this.menuStrip1.TabIndex = 12;
-            this.menuStrip1.Text = "menuStrip1";
+            this.detailInvoiceMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem});
+            this.detailInvoiceMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.detailInvoiceMenuStrip.Name = "detailInvoiceMenuStrip";
+            this.detailInvoiceMenuStrip.Size = new System.Drawing.Size(751, 24);
+            this.detailInvoiceMenuStrip.TabIndex = 12;
+            this.detailInvoiceMenuStrip.Text = "menuStrip1";
             // 
-            // testToolStripMenuItem
+            // optionsToolStripMenuItem
             // 
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
-            this.testToolStripMenuItem.Text = "test";
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editInvoiceToolStripMenuItem,
+            this.sendInvoiceToolStripMenuItem});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.optionsToolStripMenuItem.Text = "Opties";
             // 
             // label8
             // 
@@ -367,11 +374,47 @@ namespace FactuurApp
             this.priceVATInclusiveLabel.TabIndex = 18;
             this.priceVATInclusiveLabel.Text = "<?>";
             // 
+            // editInvoiceToolStripMenuItem
+            // 
+            this.editInvoiceToolStripMenuItem.Name = "editInvoiceToolStripMenuItem";
+            this.editInvoiceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editInvoiceToolStripMenuItem.Text = "Bewerk factuur";
+            this.editInvoiceToolStripMenuItem.Click += new System.EventHandler(this.editInvoiceToolStripMenuItem_Click);
+            // 
+            // sendInvoiceToolStripMenuItem
+            // 
+            this.sendInvoiceToolStripMenuItem.Name = "sendInvoiceToolStripMenuItem";
+            this.sendInvoiceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sendInvoiceToolStripMenuItem.Text = "Verstuur factuur";
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Location = new System.Drawing.Point(635, 458);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(55, 13);
+            this.label12.TabIndex = 27;
+            this.label12.Text = "________";
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(696, 453);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(18, 20);
+            this.label13.TabIndex = 28;
+            this.label13.Text = "+";
+            // 
             // InvoiceDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(751, 511);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.priceVATInclusiveLabel);
             this.Controls.Add(this.priceVATLabel);
             this.Controls.Add(this.priceVATExclusiveLabel);
@@ -381,8 +424,9 @@ namespace FactuurApp
             this.Controls.Add(this.invoiceRulesDataGridView);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.detailInvoiceMenuStrip);
+            this.Controls.Add(this.label12);
+            this.MainMenuStrip = this.detailInvoiceMenuStrip;
             this.Name = "InvoiceDetailForm";
             this.Text = "Factuur";
             this.Load += new System.EventHandler(this.InvoiceForm_Load);
@@ -391,8 +435,8 @@ namespace FactuurApp
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceRulesDataGridView)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.detailInvoiceMenuStrip.ResumeLayout(false);
+            this.detailInvoiceMenuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -419,8 +463,8 @@ namespace FactuurApp
         private System.Windows.Forms.Label phoneNumberLabel;
         private System.Windows.Forms.Label emailAddressLabel;
         private System.Windows.Forms.DataGridView invoiceRulesDataGridView;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip detailInvoiceMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn taskAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn taskDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn taskPrice;
@@ -431,5 +475,9 @@ namespace FactuurApp
         private System.Windows.Forms.Label priceVATExclusiveLabel;
         private System.Windows.Forms.Label priceVATLabel;
         private System.Windows.Forms.Label priceVATInclusiveLabel;
+        private System.Windows.Forms.ToolStripMenuItem editInvoiceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sendInvoiceToolStripMenuItem;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
     }
 }
