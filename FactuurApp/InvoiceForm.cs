@@ -12,7 +12,7 @@ namespace FactuurApp
 {
     public partial class InvoiceForm : Form
     {
-        private Invoice invoice = new Invoice();
+        private Invoice invoice;
         
         private List<Customer> customersList = new List<Customer>();
         private List<Task> tasksList = new List<Task>();
@@ -28,7 +28,9 @@ namespace FactuurApp
 
             taskDeleteButton.Enabled = false;
             taskSubmitButton.Enabled = false;
-
+        }
+        private void InvoiceForm_Load(object sender, EventArgs e)
+        {
             Database.MakeConnection();
 
             if (Database.CheckConnection())
@@ -42,7 +44,7 @@ namespace FactuurApp
 
                 tasksComboBox.SelectedIndex = -1;
 
-                if (invoice.Id > 0)
+                if (invoice == null)
                 {
                     this.Text = "Nieuw factuur";
 
@@ -53,7 +55,6 @@ namespace FactuurApp
 
                         customersComboBox.Items.Add(string.Format("{0} - {1}", customer.Id, fullName));
                     }
-
 
                     priceVATExclusiveLabel.Text = "€ 0.00";
                     priceVATLabel.Text = "€ 0.00";
@@ -70,30 +71,27 @@ namespace FactuurApp
                     priceVATInclusiveLabel.Text = string.Format("€ {0}", (invoice.TotalPrice + invoice.VATPrice));
 
                     customer = invoice.Customer;
-                    if(customer == null)
-                    {
-                        MessageBox.Show("Klant is leeg");
-                        return;
-                    }
 
-                    string fullName = customer.Insertion != null ? 
+                    string fullName = customer.Insertion != null ?
                     string.Format("{0} {1} {2}", customer.FirstName, customer.Insertion, customer.LastName) :
                     string.Format("{0} {1}", customer.FirstName, customer.LastName);
 
                     customersComboBox.Text = string.Format("{0} - {1}", customer.Id, fullName);
                     customersComboBox.Enabled = false;
 
-                    foreach(InvoiceRule rule in invoice.InvoiceRules)
+                    foreach (InvoiceRule rule in invoice.InvoiceRules)
                     {
                         invoiceRulesDataGridView.Rows.Add(rule.Amount, rule.Task.Description, rule.Task.Price, rule.Task.Price * rule.Amount);
                     }
 
-                    paymentTermMonthCalendar.TodayDate = invoice.PaymentTerm;
+                    paymentTermMonthCalendar.SetDate(invoice.PaymentTerm);
                 }
-
-
             }
             Database.CloseConnection();
+        }
+        private void InvoiceForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //invoice ??= null;
         }
 
         public void SetInvoice(Invoice Invoice)
@@ -204,5 +202,6 @@ namespace FactuurApp
                 taskSubmitButton.Enabled = false;
             }
         }
+
     }
 }

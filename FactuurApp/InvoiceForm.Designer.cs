@@ -88,7 +88,7 @@ namespace FactuurApp
             // 
             // taskAmountNumericUpDown
             // 
-            this.taskAmountNumericUpDown.Location = new System.Drawing.Point(219, 36);
+            this.taskAmountNumericUpDown.Location = new System.Drawing.Point(219, 37);
             this.taskAmountNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -105,7 +105,7 @@ namespace FactuurApp
             // 
             // taskSubmitButton
             // 
-            this.taskSubmitButton.Location = new System.Drawing.Point(6, 67);
+            this.taskSubmitButton.Location = new System.Drawing.Point(9, 67);
             this.taskSubmitButton.Name = "taskSubmitButton";
             this.taskSubmitButton.Size = new System.Drawing.Size(100, 23);
             this.taskSubmitButton.TabIndex = 24;
@@ -127,9 +127,9 @@ namespace FactuurApp
             this.tasksComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.tasksComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.tasksComboBox.FormattingEnabled = true;
-            this.tasksComboBox.Location = new System.Drawing.Point(6, 35);
+            this.tasksComboBox.Location = new System.Drawing.Point(9, 36);
             this.tasksComboBox.Name = "tasksComboBox";
-            this.tasksComboBox.Size = new System.Drawing.Size(200, 21);
+            this.tasksComboBox.Size = new System.Drawing.Size(197, 21);
             this.tasksComboBox.TabIndex = 22;
             this.tasksComboBox.SelectedIndexChanged += new System.EventHandler(this.tasksComboBox_SelectedIndexChanged);
             // 
@@ -220,9 +220,9 @@ namespace FactuurApp
             this.customersComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.customersComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.customersComboBox.FormattingEnabled = true;
-            this.customersComboBox.Location = new System.Drawing.Point(6, 35);
+            this.customersComboBox.Location = new System.Drawing.Point(9, 36);
             this.customersComboBox.Name = "customersComboBox";
-            this.customersComboBox.Size = new System.Drawing.Size(200, 21);
+            this.customersComboBox.Size = new System.Drawing.Size(197, 21);
             this.customersComboBox.TabIndex = 15;
             this.customersComboBox.SelectedIndexChanged += new System.EventHandler(this.customersComboBox_SelectedIndexChanged);
             // 
@@ -238,7 +238,7 @@ namespace FactuurApp
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 67);
+            this.label2.Location = new System.Drawing.Point(6, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 17;
@@ -355,6 +355,8 @@ namespace FactuurApp
             this.Controls.Add(this.label6);
             this.Name = "InvoiceForm";
             this.Text = "<?>";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InvoiceForm_FormClosed);
+            this.Load += new System.EventHandler(this.InvoiceForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.taskAmountNumericUpDown)).EndInit();
