@@ -53,8 +53,6 @@ namespace FactuurApp
             this.taskPriceTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.pinRadioButton = new System.Windows.Forms.RadioButton();
-            this.cashRadioButton = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -207,7 +205,7 @@ namespace FactuurApp
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(127, 16);
             this.label8.TabIndex = 19;
-            this.label8.Text = "Totaal exlc. BTW";
+            this.label8.Text = "Totaal excl. BTW";
             // 
             // paymentTermMonthCalendar
             // 
@@ -303,8 +301,6 @@ namespace FactuurApp
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.cashRadioButton);
-            this.groupBox2.Controls.Add(this.pinRadioButton);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.customersComboBox);
@@ -316,28 +312,6 @@ namespace FactuurApp
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Factuur gegevens";
-            // 
-            // pinRadioButton
-            // 
-            this.pinRadioButton.AutoSize = true;
-            this.pinRadioButton.Location = new System.Drawing.Point(9, 83);
-            this.pinRadioButton.Name = "pinRadioButton";
-            this.pinRadioButton.Size = new System.Drawing.Size(40, 17);
-            this.pinRadioButton.TabIndex = 22;
-            this.pinRadioButton.TabStop = true;
-            this.pinRadioButton.Text = "Pin";
-            this.pinRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // cashRadioButton
-            // 
-            this.cashRadioButton.AutoSize = true;
-            this.cashRadioButton.Location = new System.Drawing.Point(9, 106);
-            this.cashRadioButton.Name = "cashRadioButton";
-            this.cashRadioButton.Size = new System.Drawing.Size(62, 17);
-            this.cashRadioButton.TabIndex = 23;
-            this.cashRadioButton.TabStop = true;
-            this.cashRadioButton.Text = "Contant";
-            this.cashRadioButton.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -417,8 +391,6 @@ namespace FactuurApp
         private System.Windows.Forms.ComboBox tasksComboBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown taskAmountNumericUpDown;
-        private System.Windows.Forms.RadioButton cashRadioButton;
-        private System.Windows.Forms.RadioButton pinRadioButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
     }

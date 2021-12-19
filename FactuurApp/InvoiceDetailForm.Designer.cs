@@ -54,14 +54,14 @@ namespace FactuurApp
             this.taskPriceTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detailInvoiceMenuStrip = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editInvoiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sendInvoiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.priceVATExclusiveLabel = new System.Windows.Forms.Label();
             this.priceVATLabel = new System.Windows.Forms.Label();
             this.priceVATInclusiveLabel = new System.Windows.Forms.Label();
-            this.editInvoiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sendInvoiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -311,6 +311,19 @@ namespace FactuurApp
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.optionsToolStripMenuItem.Text = "Opties";
             // 
+            // editInvoiceToolStripMenuItem
+            // 
+            this.editInvoiceToolStripMenuItem.Name = "editInvoiceToolStripMenuItem";
+            this.editInvoiceToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.editInvoiceToolStripMenuItem.Text = "Bewerk factuur";
+            this.editInvoiceToolStripMenuItem.Click += new System.EventHandler(this.editInvoiceToolStripMenuItem_Click);
+            // 
+            // sendInvoiceToolStripMenuItem
+            // 
+            this.sendInvoiceToolStripMenuItem.Name = "sendInvoiceToolStripMenuItem";
+            this.sendInvoiceToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.sendInvoiceToolStripMenuItem.Text = "Verstuur factuur";
+            // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -320,7 +333,7 @@ namespace FactuurApp
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(127, 16);
             this.label8.TabIndex = 13;
-            this.label8.Text = "Totaal exlc. BTW";
+            this.label8.Text = "Totaal excl. BTW";
             // 
             // label9
             // 
@@ -373,19 +386,6 @@ namespace FactuurApp
             this.priceVATInclusiveLabel.Size = new System.Drawing.Size(25, 13);
             this.priceVATInclusiveLabel.TabIndex = 18;
             this.priceVATInclusiveLabel.Text = "<?>";
-            // 
-            // editInvoiceToolStripMenuItem
-            // 
-            this.editInvoiceToolStripMenuItem.Name = "editInvoiceToolStripMenuItem";
-            this.editInvoiceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.editInvoiceToolStripMenuItem.Text = "Bewerk factuur";
-            this.editInvoiceToolStripMenuItem.Click += new System.EventHandler(this.editInvoiceToolStripMenuItem_Click);
-            // 
-            // sendInvoiceToolStripMenuItem
-            // 
-            this.sendInvoiceToolStripMenuItem.Name = "sendInvoiceToolStripMenuItem";
-            this.sendInvoiceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sendInvoiceToolStripMenuItem.Text = "Verstuur factuur";
             // 
             // label12
             // 
