@@ -99,6 +99,7 @@
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Database.cs" />
+    <Compile Include="IMySqlObject.cs" />
     <Compile Include="InvoiceDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
