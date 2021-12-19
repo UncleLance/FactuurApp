@@ -34,6 +34,13 @@ namespace FactuurApp
             if (Database.CheckConnection())
             {
                 customersList = Database.GetAllCustomers();
+                tasksList = Database.GetAllTasks();
+
+                tasksComboBox.DataSource = tasksList;
+                tasksComboBox.DisplayMember = "Description";
+                tasksComboBox.ValueMember = "Id";
+
+                tasksComboBox.SelectedIndex = -1;
 
                 if (invoice.Id > 0)
                 {
@@ -84,16 +91,9 @@ namespace FactuurApp
                     paymentTermMonthCalendar.TodayDate = invoice.PaymentTerm;
                 }
 
-                tasksList = Database.GetAllTasks();
+
             }
-            
             Database.CloseConnection();
-
-            tasksComboBox.DataSource = tasksList;
-            tasksComboBox.DisplayMember = "Description";
-            tasksComboBox.ValueMember = "Id";
-
-            tasksComboBox.SelectedIndex = -1;
         }
 
         public void SetInvoice(Invoice Invoice)
