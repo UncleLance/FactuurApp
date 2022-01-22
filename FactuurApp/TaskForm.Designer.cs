@@ -91,7 +91,7 @@ namespace FactuurApp
             this.taskSubmitButton.Name = "taskSubmitButton";
             this.taskSubmitButton.Size = new System.Drawing.Size(75, 23);
             this.taskSubmitButton.TabIndex = 5;
-            this.taskSubmitButton.Text = "Voeg toe";
+            this.taskSubmitButton.Text = "Opslaan";
             this.taskSubmitButton.UseVisualStyleBackColor = true;
             this.taskSubmitButton.Click += new System.EventHandler(this.taskSubmitButton_Click);
             // 

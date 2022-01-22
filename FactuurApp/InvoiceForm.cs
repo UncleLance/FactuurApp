@@ -13,11 +13,11 @@ namespace FactuurApp
     public partial class InvoiceForm : Form
     {
         private Invoice invoice;
+        private Company company = new();
         
-        private List<Customer> customersList = new List<Customer>();
-        private List<Task> tasksList = new List<Task>();
+        private List<Company> companyList = new();
+        private List<Task> tasksList = new();
 
-        private Customer customer = new Customer();
         private DateTime paymentTerm;
         private decimal totalPriceVATExlusive = 0M;
         private decimal priceVAT = 0M;
@@ -35,7 +35,13 @@ namespace FactuurApp
 
             if (Database.CheckConnection())
             {
-                customersList = Database.GetAllCustomers();
+                companyList = Database.GetAllCompanies();
+
+                for(int i = 0; i < companyList.Count; i++)
+                {
+                    companiesComboBox.Items.Add(string.Format("{0} - {1}", companyList[i].Id, companyList[i].CompanyName));
+                }
+
                 tasksList = Database.GetAllTasks();
 
                 tasksComboBox.DataSource = tasksList;
@@ -48,14 +54,6 @@ namespace FactuurApp
                 {
                     this.Text = "Nieuw factuur";
 
-                    foreach (Customer customer in customersList)
-                    {
-                        string fullName = customer.Insertion != null ? string.Format("{0} {1} {2}", customer.FirstName, customer.Insertion, customer.LastName) :
-                            string.Format("{0} {1}", customer.FirstName, customer.LastName);
-
-                        customersComboBox.Items.Add(string.Format("{0} - {1}", customer.Id, fullName));
-                    }
-
                     priceVATExclusiveLabel.Text = "€ 0.00";
                     priceVATLabel.Text = "€ 0.00";
                     priceVATInclusiveLabel.Text = "€ 0.00";
@@ -64,34 +62,28 @@ namespace FactuurApp
                 }
                 else
                 {
-                    this.Text = string.Format("Factuur #{0}", invoice.Id);
+                    this.Text = string.Format("Bewerk factuur #{0}", invoice.Id);
+
+                    companiesComboBox.SelectedText = string.Format("{0} - {1}", invoice.Company.Id, invoice.Company.CompanyName);
+
+                    companyIdLabel.Text = invoice.Company.Id.ToString();
+                    companyNameLabel.Text = invoice.Company.CompanyName;
+                    companyAddressLabel.Text = invoice.Company.Address;
+                    companyPostalCodeLabel.Text = string.Format("{0} {1} {2}", invoice.Company.PostalCode, invoice.Company.City, invoice.Company.Country);
 
                     priceVATExclusiveLabel.Text = string.Format("€ {0}", invoice.TotalPrice);
                     priceVATLabel.Text = string.Format("€ {0}", invoice.VATPrice);
                     priceVATInclusiveLabel.Text = string.Format("€ {0}", (invoice.TotalPrice + invoice.VATPrice));
 
-                    customer = invoice.Customer;
-
-                    string fullName = customer.Insertion != null ?
-                    string.Format("{0} {1} {2}", customer.FirstName, customer.Insertion, customer.LastName) :
-                    string.Format("{0} {1}", customer.FirstName, customer.LastName);
-
-                    customersComboBox.Text = string.Format("{0} - {1}", customer.Id, fullName);
-                    customersComboBox.Enabled = false;
-
                     foreach (InvoiceRule rule in invoice.InvoiceRules)
                     {
-                        invoiceRulesDataGridView.Rows.Add(rule.Amount, rule.Task.Description, rule.Task.Price, rule.Task.Price * rule.Amount);
+                        invoiceRulesDataGridView.Rows.Add(rule.Id, rule.Amount, rule.Task.Description, rule.Task.Price, rule.Task.Price * rule.Amount);
                     }
 
                     paymentTermMonthCalendar.SetDate(invoice.PaymentTerm);
                 }
             }
             Database.CloseConnection();
-        }
-        private void InvoiceForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            //invoice ??= null;
         }
 
         public void SetInvoice(Invoice Invoice)
@@ -125,9 +117,9 @@ namespace FactuurApp
             paymentTerm = paymentTermMonthCalendar.SelectionRange.Start;
         }
 
-        private void customersComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void companiesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            customer = customersList.Where(customer => customer.Id == (customersComboBox.SelectedIndex + 1)).First();
+            company = companyList.Where(c => c.Id == (companiesComboBox.SelectedIndex + 1)).First();
         }
 
         private void invoiceRulesDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -203,5 +195,18 @@ namespace FactuurApp
             }
         }
 
+        private void invoiceSubmitButton_Click(object sender, EventArgs e)
+        {
+            if(invoiceRulesDataGridView.Rows.Count == 0)
+            {
+                MessageBox.Show("Er zijn geen taken toegewezen!");
+                return;
+            }
+        }
+
+        private void invoiceRulesDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MessageBox.Show("id: " + invoiceRulesDataGridView.CurrentRow.Cells[0].Value.ToString());
+        }
     }
 }

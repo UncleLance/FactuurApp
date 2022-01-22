@@ -13,7 +13,7 @@ namespace FactuurApp
     static class Database
     {
         static readonly string connectionString = "server=localhost;user=root;database=facturen_apcbreda;port=3306";
-        static readonly MySqlConnection connection = new MySqlConnection(connectionString);
+        static readonly MySqlConnection connection = new(connectionString);
 
         //==================
         // DATABASE CLASS RELATED METHODS
@@ -53,28 +53,30 @@ namespace FactuurApp
         //==================
         public static List<Invoice> GetAllInvoices()
         {
-            List<Invoice> invoiceList = new List<Invoice>();
+            List<Invoice> invoiceList = new();
 
-            if (CheckConnection() == true)
+            if (CheckConnection())
             {
-                //Step 1: Get all invoices with the corresponding customer and payment method
-                List<Customer> customerList = GetAllCustomers();
+                //Step 1: Get all invoices with the corresponding company and payment method
+                List<Company> companyList = GetAllCompanies();
                 List<PaymentMethod> methods = GetAllMethods();
 
                 string query = "SELECT * FROM invoices";
-                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlCommand command = new(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    Invoice invoice = new Invoice();
-                    invoice.Id = reader.GetInt32(0);
-                    invoice.Customer = customerList.Where(c => c.Id == reader.GetInt32(1)).First();
-                    invoice.PaymentMethod = methods.Where(c => c.Id == reader.GetInt32(2)).First();
-                    invoice.PaymentTerm = reader.GetDateTime(3);
-                    invoice.TotalPrice = reader.GetDecimal(4);
-                    invoice.VATPrice = reader.GetDecimal(5);
-                    invoice.CreatedAt = reader.GetDateTime(6);
+                    Invoice invoice = new()
+                    {
+                        Id = reader.GetInt32(0),
+                        Company = companyList.Where(c => c.Id == reader.GetInt32(1)).First(),
+                        PaymentMethod = methods.Where(c => c.Id == reader.GetInt32(2)).First(),
+                        PaymentTerm = reader.GetDateTime(3),
+                        TotalPrice = reader.GetDecimal(4),
+                        VATPrice = reader.GetDecimal(5),
+                        CreatedAt = reader.GetDateTime(6)
+                    };
 
                     invoiceList.Add(invoice);
                 }
@@ -89,6 +91,81 @@ namespace FactuurApp
             return null;
         }
 
+        public static void AddCompany(Company company)
+        {
+            connection.Open();
+
+            if (CheckConnection())
+            {
+                try
+                {
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "INSERT INTO companies (company_name, address, city, postal_code, country, contact_person, phone_number, email_address)" +
+                        " VALUES (?company_name, ?address, ?city, ?postal_code, ?country, ?contact_person, ?phone_number, ?email_address)";
+                    command.Parameters.Add("?company_name", MySqlDbType.VarChar).Value = company.CompanyName;
+                    command.Parameters.Add("?address", MySqlDbType.VarChar).Value = company.Address;
+                    command.Parameters.Add("?city", MySqlDbType.VarChar).Value = company.City;
+                    command.Parameters.Add("?postal_code", MySqlDbType.VarChar).Value = company.PostalCode;
+                    command.Parameters.Add("?country", MySqlDbType.VarChar).Value = company.Country;
+                    command.Parameters.Add("?contact_person", MySqlDbType.VarChar).Value = company.ContactPerson;
+                    command.Parameters.Add("?phone_number", MySqlDbType.VarChar).Value = company.PhoneNumber;
+                    command.Parameters.Add("?email_address", MySqlDbType.VarChar).Value = company.EmailAddress;
+
+                    int affectedRows = command.ExecuteNonQuery();
+
+                    if (affectedRows > 0)
+                    {
+                        MessageBox.Show("Bedrijf is succesvol toegevoegd!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Er ging iets mis...");
+                    }
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.ToString());
+                }
+
+                connection.Close();
+            }
+        }
+
+        public static List<Company> GetAllCompanies()
+        {
+            List<Company> companyList = new();
+
+            if (CheckConnection())
+            {
+                string query = "SELECT * FROM companies";
+                MySqlCommand command = new(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Company company = new()
+                    {
+                        Id = reader.GetInt32(0),
+                        CompanyName = reader.GetString(1),
+                        Address = reader.GetString(2),
+                        City = reader.GetString(3),
+                        PostalCode = reader.GetString(4),
+                        Country = !reader.IsDBNull(5) ? reader.GetString(5) : null,
+                        ContactPerson = !reader.IsDBNull(6) ? reader.GetString(6) : null,
+                        PhoneNumber = !reader.IsDBNull(7) ? reader.GetString(7) : null,
+                        EmailAddress = !reader.IsDBNull(8) ? reader.GetString(8) : null
+                    };
+
+                    companyList.Add(company);
+                }
+                reader.Close();
+
+                return companyList;
+            }
+
+            return null;
+        }
+
         //==================
         // INVOICE RULE RELATED METHODS
         //==================
@@ -97,22 +174,24 @@ namespace FactuurApp
             List<Car> cars = GetAllCars();
             List<Task> tasks = GetAllTasks();
             
-            List<InvoiceRule> rules = new List<InvoiceRule>();
+            List<InvoiceRule> rules = new();
             
             string query = "SELECT * FROM invoice_rules";
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new(query, connection);
             MySqlDataReader reader = command.ExecuteReader();
 
-            if(CheckConnection() == true)
+            if(CheckConnection())
             {
                 while (reader.Read())
                 {
-                    InvoiceRule invoiceRule = new InvoiceRule();
-                    invoiceRule.Id = reader.GetInt32(0);
-                    invoiceRule.InvoiceId = reader.GetInt32(1);
-                    invoiceRule.Task = tasks.Where(t => t.Id == reader.GetInt32(2)).First();
-                    invoiceRule.Car = cars.Where(c => c.Id == reader.GetInt32(3)).First();
-                    invoiceRule.Amount = reader.GetInt32(4);
+                    InvoiceRule invoiceRule = new()
+                    {
+                        Id = reader.GetInt32(0),
+                        InvoiceId = reader.GetInt32(1),
+                        Task = tasks.Where(t => t.Id == reader.GetInt32(2)).First(),
+                        Car = cars.Where(c => c.Id == reader.GetInt32(3)).First(),
+                        Amount = reader.GetInt32(4)
+                    };
 
                     rules.Add(invoiceRule);
                 }
@@ -135,21 +214,22 @@ namespace FactuurApp
         //==================
         public static List<Task> GetAllTasks()
         {
-            List<Task> tasks = new List<Task>();
+            List<Task> tasks = new();
 
-            if (CheckConnection() == true)
+            if (CheckConnection())
             {
                 string query = "SELECT * FROM tasks";
-                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlCommand command = new(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    Task task = new Task();
-
-                    task.Id = reader.GetInt32(0);
-                    task.Description = reader.GetString(1);
-                    task.Price = reader.GetDecimal(2);
+                    Task task = new()
+                    {
+                        Id = reader.GetInt32(0),
+                        Description = reader.GetString(1),
+                        Price = reader.GetDecimal(2)
+                    };
 
                     tasks.Add(task);
                 }
@@ -164,7 +244,7 @@ namespace FactuurApp
         {
             connection.Open();
             
-            if (CheckConnection() == true)
+            if (CheckConnection())
             {
                 try
                 {
@@ -198,21 +278,22 @@ namespace FactuurApp
         //==================
         public static List<Car> GetAllCars()
         {
-            List<Car> cars = new List<Car>();
+            List<Car> cars = new();
 
-            if(CheckConnection() == true)
+            if(CheckConnection())
             {
                 string query = "SELECT * FROM cars";
-                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlCommand command = new(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    Car car = new Car();
-
-                    car.Id = reader.GetInt32(0);
-                    car.Model = reader.GetString(1);
-                    car.NumberPlate = reader.GetString(2);
+                    Car car = new()
+                    {
+                        Id = reader.GetInt32(0),
+                        Model = reader.GetString(1),
+                        NumberPlate = reader.GetString(2)
+                    };
 
                     cars.Add(car);
                 }
@@ -228,19 +309,21 @@ namespace FactuurApp
         //==================
         public static List<PaymentMethod> GetAllMethods()
         {
-            List<PaymentMethod> methods = new List<PaymentMethod>();
+            List<PaymentMethod> methods = new();
 
-            if (CheckConnection() == true)
+            if (CheckConnection())
             {
                 string query = "SELECT * FROM payment_methods";
-                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlCommand command = new(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    PaymentMethod paymentMethod = new PaymentMethod();
-                    paymentMethod.Id = reader.GetInt32(0);
-                    paymentMethod.Method = reader.GetString(1);
+                    PaymentMethod paymentMethod = new()
+                    {
+                        Id = reader.GetInt32(0),
+                        Method = reader.GetString(1)
+                    };
 
                     methods.Add(paymentMethod);
                 }
@@ -252,44 +335,11 @@ namespace FactuurApp
             return null;
         }
 
-        //==================
-        // CUSTOMER RELATED METHODS
-        //==================
-        public static List<Customer> GetAllCustomers()
-        {
-            List<Customer> customerList = new List<Customer>();
-
-            if (CheckConnection() == true)
-            {
-                string query = "SELECT * FROM customers";
-                MySqlCommand command = new MySqlCommand(query, connection);
-                MySqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Customer customer = new Customer();
-                    customer.Id = reader.GetInt32(0);
-                    customer.FirstName = reader.GetString(1);
-                    customer.Insertion = !reader.IsDBNull(2) ? reader.GetString(2) : null;
-                    customer.LastName = reader.GetString(3);
-                    customer.PhoneNumber = reader.GetString(4);
-                    customer.EmailAddress = reader.GetString(5);
-
-                    customerList.Add(customer);
-                }
-                reader.Close();
-
-                return customerList;
-            }
-
-            return null;
-        }
-
         public static void AddCustomer(Customer customer)
         {
             connection.Open();
 
-            if (CheckConnection() == true)
+            if (CheckConnection())
             {
                 try
                 {

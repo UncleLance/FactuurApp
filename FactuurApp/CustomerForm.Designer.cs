@@ -62,7 +62,7 @@ namespace FactuurApp
             | System.Windows.Forms.AnchorStyles.Right)));
             this.customerInsertionTextBox.Location = new System.Drawing.Point(101, 71);
             this.customerInsertionTextBox.Name = "customerInsertionTextBox";
-            this.customerInsertionTextBox.Size = new System.Drawing.Size(150, 20);
+            this.customerInsertionTextBox.Size = new System.Drawing.Size(270, 20);
             this.customerInsertionTextBox.TabIndex = 9;
             // 
             // label2
@@ -82,7 +82,7 @@ namespace FactuurApp
             | System.Windows.Forms.AnchorStyles.Right)));
             this.customerFirstNameTextBox.Location = new System.Drawing.Point(101, 45);
             this.customerFirstNameTextBox.Name = "customerFirstNameTextBox";
-            this.customerFirstNameTextBox.Size = new System.Drawing.Size(150, 20);
+            this.customerFirstNameTextBox.Size = new System.Drawing.Size(270, 20);
             this.customerFirstNameTextBox.TabIndex = 7;
             // 
             // label1
@@ -148,7 +148,7 @@ namespace FactuurApp
             this.customerSubmitButton.Name = "customerSubmitButton";
             this.customerSubmitButton.Size = new System.Drawing.Size(75, 23);
             this.customerSubmitButton.TabIndex = 17;
-            this.customerSubmitButton.Text = "Voeg toe";
+            this.customerSubmitButton.Text = "Opslaan";
             this.customerSubmitButton.UseVisualStyleBackColor = true;
             this.customerSubmitButton.Click += new System.EventHandler(this.customerSubmitButton_Click);
             // 
@@ -156,7 +156,7 @@ namespace FactuurApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 216);
+            this.ClientSize = new System.Drawing.Size(384, 216);
             this.Controls.Add(this.customerSubmitButton);
             this.Controls.Add(this.customerEmailTextBox);
             this.Controls.Add(this.label6);

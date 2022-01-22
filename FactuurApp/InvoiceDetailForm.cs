@@ -12,7 +12,7 @@ namespace FactuurApp
 {
     public partial class InvoiceDetailForm : Form
     {
-        private Invoice invoice = new Invoice();
+        private Invoice invoice = new();
         private decimal totalPriceVATExlusive = 0M;
         private decimal priceVAT = 0M;
         private decimal totalPriceVATInclusive = 0M;
@@ -49,17 +49,17 @@ namespace FactuurApp
             double difference = Math.Round((invoice.PaymentTerm - DateTime.Now).TotalDays);
             paymentTermLabel.Text = string.Format("Binnen {0} dagen", difference);
 
-            customerIdLabel.Text = invoice.Customer.Id.ToString();
-            if (invoice.Customer.Insertion != null)
-            {
-                customerNameLabel.Text = string.Format("{0} {1} {2}", invoice.Customer.FirstName, invoice.Customer.Insertion, invoice.Customer.LastName);
-            }
-            else
-            {
-                customerNameLabel.Text = string.Format("{0} {1}", invoice.Customer.FirstName, invoice.Customer.LastName);
-            }
-            phoneNumberLabel.Text = invoice.Customer.PhoneNumber;
-            emailAddressLabel.Text = invoice.Customer.EmailAddress;
+            //customeridlabel.text = invoice.customer.id.tostring();
+            //if (invoice.customer.insertion != null)
+            //{
+            //    customernamelabel.text = string.format("{0} {1} {2}", invoice.customer.firstname, invoice.customer.insertion, invoice.customer.lastname);
+            //}
+            //else
+            //{
+            //    customernamelabel.text = string.format("{0} {1}", invoice.customer.firstname, invoice.customer.lastname);
+            //}
+            //phonenumberlabel.text = invoice.customer.phonenumber;
+            //emailaddresslabel.text = invoice.customer.emailaddress;
 
             priceVATExclusiveLabel.Text = string.Format("€ {0}", invoice.TotalPrice - invoice.VATPrice);
             priceVATLabel.Text = string.Format("€ {0}", invoice.VATPrice);
@@ -73,7 +73,7 @@ namespace FactuurApp
 
         private void editInvoiceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            InvoiceForm invoiceForm = new InvoiceForm();
+            InvoiceForm invoiceForm = new();
 
             invoiceForm.SetInvoice(invoice);
 

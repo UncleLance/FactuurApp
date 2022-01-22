@@ -31,7 +31,7 @@ namespace FactuurApp
         {
             this.invoicesGridView = new System.Windows.Forms.DataGridView();
             this.invoiceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.companyId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.paymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.paymentTerm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalPriceExclusive = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +57,7 @@ namespace FactuurApp
             this.customerIdLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.companyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.invoicesGridView)).BeginInit();
             this.searchOptionsGroupBox.SuspendLayout();
             this.optionsMenuStrip.SuspendLayout();
@@ -73,7 +74,7 @@ namespace FactuurApp
             this.invoicesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.invoicesGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.invoiceId,
-            this.customerId,
+            this.companyId,
             this.paymentMethod,
             this.paymentTerm,
             this.totalPriceExclusive,
@@ -95,12 +96,12 @@ namespace FactuurApp
             this.invoiceId.ReadOnly = true;
             this.invoiceId.Width = 120;
             // 
-            // customerId
+            // companyId
             // 
-            this.customerId.HeaderText = "Klant nummer";
-            this.customerId.Name = "customerId";
-            this.customerId.ReadOnly = true;
-            this.customerId.Width = 120;
+            this.companyId.HeaderText = "Bedrijf nummer";
+            this.companyId.Name = "companyId";
+            this.companyId.ReadOnly = true;
+            this.companyId.Width = 120;
             // 
             // paymentMethod
             // 
@@ -220,7 +221,8 @@ namespace FactuurApp
             this.newAddToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.customerToolStripMenuItem,
             this.invoiceToolStripMenuItem,
-            this.taskToolStripMenuItem});
+            this.taskToolStripMenuItem,
+            this.companyToolStripMenuItem});
             this.newAddToolStripMenuItem.Name = "newAddToolStripMenuItem";
             this.newAddToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
             this.newAddToolStripMenuItem.Text = "Voeg nieuw...";
@@ -228,21 +230,21 @@ namespace FactuurApp
             // customerToolStripMenuItem
             // 
             this.customerToolStripMenuItem.Name = "customerToolStripMenuItem";
-            this.customerToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.customerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.customerToolStripMenuItem.Text = "Klant";
             this.customerToolStripMenuItem.Click += new System.EventHandler(this.customerToolStripMenuItem_Click);
             // 
             // invoiceToolStripMenuItem
             // 
             this.invoiceToolStripMenuItem.Name = "invoiceToolStripMenuItem";
-            this.invoiceToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.invoiceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.invoiceToolStripMenuItem.Text = "Factuur";
             this.invoiceToolStripMenuItem.Click += new System.EventHandler(this.invoiceToolStripMenuItem_Click);
             // 
             // taskToolStripMenuItem
             // 
             this.taskToolStripMenuItem.Name = "taskToolStripMenuItem";
-            this.taskToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.taskToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.taskToolStripMenuItem.Text = "Taak";
             this.taskToolStripMenuItem.Click += new System.EventHandler(this.taskToolStripMenuItem_Click);
             // 
@@ -319,6 +321,13 @@ namespace FactuurApp
             this.label4.TabIndex = 0;
             this.label4.Text = "Klantnnummer:";
             // 
+            // companyToolStripMenuItem
+            // 
+            this.companyToolStripMenuItem.Name = "companyToolStripMenuItem";
+            this.companyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.companyToolStripMenuItem.Text = "Bedrijf";
+            this.companyToolStripMenuItem.Click += new System.EventHandler(this.companyToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -367,13 +376,14 @@ namespace FactuurApp
         private System.Windows.Forms.Label customerNameLabel;
         private System.Windows.Forms.Label customerIdLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoiceId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customerId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn companyId;
         private System.Windows.Forms.DataGridViewTextBoxColumn paymentMethod;
         private System.Windows.Forms.DataGridViewTextBoxColumn paymentTerm;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPriceExclusive;
         private System.Windows.Forms.DataGridViewTextBoxColumn vatPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPriceInclusive;
         private System.Windows.Forms.DataGridViewTextBoxColumn createdAt;
+        private System.Windows.Forms.ToolStripMenuItem companyToolStripMenuItem;
     }
 }
 

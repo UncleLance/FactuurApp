@@ -33,7 +33,7 @@ namespace FactuurApp
 
             string insertion = string.IsNullOrEmpty(customerInsertionTextBox.Text) ? null : customerInsertionTextBox.Text;
 
-            Customer newCustomer = new Customer();
+            Customer newCustomer = new();
             newCustomer.FirstName = customerFirstNameTextBox.Text;
             newCustomer.Insertion = insertion;
             newCustomer.LastName = customerLastNameTextBox.Text;
@@ -42,7 +42,7 @@ namespace FactuurApp
 
             Database.AddCustomer(newCustomer);
 
-            this.Close();
+            Close();
         }
 
         private void label2_MouseHover(object sender, EventArgs e)

@@ -10,7 +10,7 @@ namespace FactuurApp
     {
         public int Id { get; set; }
         public List<InvoiceRule> InvoiceRules { get; set; }
-        public Customer Customer { get; set; }
+        public Company Company { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
         public DateTime PaymentTerm { get; set; }
         public decimal TotalPrice { get; set; }
