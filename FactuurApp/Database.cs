@@ -88,6 +88,7 @@ namespace FactuurApp
                 return invoiceList;
             }
             connection.Close();
+
             return null;
         }
 
@@ -237,6 +238,7 @@ namespace FactuurApp
 
                 return tasks;
             }
+
             return null;
         }
 
@@ -301,6 +303,7 @@ namespace FactuurApp
 
                 return cars;
             }
+
             return null;
         }
 

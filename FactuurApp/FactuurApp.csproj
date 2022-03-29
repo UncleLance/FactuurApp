@@ -119,6 +119,12 @@
     <Compile Include="InvoiceForm.Designer.cs">
       <DependentUpon>InvoiceForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InvoiceRuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InvoiceRuleForm.Designer.cs">
+      <DependentUpon>InvoiceRuleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -41,8 +41,21 @@ namespace FactuurApp
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.invoiceRulesDataGridView = new System.Windows.Forms.DataGridView();
+            this.ruleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taskAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taskDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taskPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taskPriceTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.companyIdLabel = new System.Windows.Forms.Label();
+            this.companyNameLabel = new System.Windows.Forms.Label();
+            this.companyAddressLabel = new System.Windows.Forms.Label();
+            this.companyPostalCodeLabel = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.invoiceSubmitButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.priceVATInclusiveLabel = new System.Windows.Forms.Label();
@@ -52,19 +65,9 @@ namespace FactuurApp
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.companyPostalCodeLabel = new System.Windows.Forms.Label();
-            this.companyAddressLabel = new System.Windows.Forms.Label();
-            this.companyIdLabel = new System.Windows.Forms.Label();
-            this.companyNameLabel = new System.Windows.Forms.Label();
-            this.ruleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.taskAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.taskDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.taskPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.taskPriceTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.carsComboBox = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.carSubmitButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.taskAmountNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceRulesDataGridView)).BeginInit();
@@ -75,6 +78,9 @@ namespace FactuurApp
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.carSubmitButton);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.carsComboBox);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.taskAmountNumericUpDown);
             this.groupBox1.Controls.Add(this.taskSubmitButton);
@@ -214,6 +220,40 @@ namespace FactuurApp
             this.invoiceRulesDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.invoiceRulesDataGridView_CellDoubleClick);
             this.invoiceRulesDataGridView.SelectionChanged += new System.EventHandler(this.invoiceRulesDataGridView_SelectionChanged);
             // 
+            // ruleId
+            // 
+            this.ruleId.HeaderText = "ruleId";
+            this.ruleId.Name = "ruleId";
+            this.ruleId.ReadOnly = true;
+            this.ruleId.Visible = false;
+            // 
+            // taskAmount
+            // 
+            this.taskAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.taskAmount.HeaderText = "Aantal";
+            this.taskAmount.Name = "taskAmount";
+            this.taskAmount.ReadOnly = true;
+            this.taskAmount.Width = 62;
+            // 
+            // taskDescription
+            // 
+            this.taskDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.taskDescription.HeaderText = "Omschrijving";
+            this.taskDescription.Name = "taskDescription";
+            this.taskDescription.ReadOnly = true;
+            // 
+            // taskPrice
+            // 
+            this.taskPrice.HeaderText = "Prijs per eenheid";
+            this.taskPrice.Name = "taskPrice";
+            this.taskPrice.ReadOnly = true;
+            // 
+            // taskPriceTotal
+            // 
+            this.taskPriceTotal.HeaderText = "Totaal";
+            this.taskPriceTotal.Name = "taskPriceTotal";
+            this.taskPriceTotal.ReadOnly = true;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -244,6 +284,78 @@ namespace FactuurApp
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Factuur gegevens";
+            // 
+            // companyIdLabel
+            // 
+            this.companyIdLabel.AutoSize = true;
+            this.companyIdLabel.Location = new System.Drawing.Point(75, 87);
+            this.companyIdLabel.Name = "companyIdLabel";
+            this.companyIdLabel.Size = new System.Drawing.Size(25, 13);
+            this.companyIdLabel.TabIndex = 29;
+            this.companyIdLabel.Text = "<?>";
+            // 
+            // companyNameLabel
+            // 
+            this.companyNameLabel.AutoSize = true;
+            this.companyNameLabel.Location = new System.Drawing.Point(75, 107);
+            this.companyNameLabel.Name = "companyNameLabel";
+            this.companyNameLabel.Size = new System.Drawing.Size(25, 13);
+            this.companyNameLabel.TabIndex = 28;
+            this.companyNameLabel.Text = "<?>";
+            // 
+            // companyAddressLabel
+            // 
+            this.companyAddressLabel.AutoSize = true;
+            this.companyAddressLabel.Location = new System.Drawing.Point(75, 127);
+            this.companyAddressLabel.Name = "companyAddressLabel";
+            this.companyAddressLabel.Size = new System.Drawing.Size(25, 13);
+            this.companyAddressLabel.TabIndex = 27;
+            this.companyAddressLabel.Text = "<?>";
+            // 
+            // companyPostalCodeLabel
+            // 
+            this.companyPostalCodeLabel.AutoSize = true;
+            this.companyPostalCodeLabel.Location = new System.Drawing.Point(75, 147);
+            this.companyPostalCodeLabel.Name = "companyPostalCodeLabel";
+            this.companyPostalCodeLabel.Size = new System.Drawing.Size(25, 13);
+            this.companyPostalCodeLabel.TabIndex = 26;
+            this.companyPostalCodeLabel.Text = "<?>";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(14, 147);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(55, 13);
+            this.label14.TabIndex = 25;
+            this.label14.Text = "Postcode:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(14, 127);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(37, 13);
+            this.label13.TabIndex = 24;
+            this.label13.Text = "Adres:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(14, 107);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(38, 13);
+            this.label12.TabIndex = 23;
+            this.label12.Text = "Naam:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(14, 87);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(49, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Nummer:";
             // 
             // invoiceSubmitButton
             // 
@@ -342,111 +454,32 @@ namespace FactuurApp
             this.label6.TabIndex = 35;
             this.label6.Text = "________";
             // 
-            // label10
+            // carsComboBox
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(14, 87);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(49, 13);
-            this.label10.TabIndex = 22;
-            this.label10.Text = "Nummer:";
+            this.carsComboBox.FormattingEnabled = true;
+            this.carsComboBox.Location = new System.Drawing.Point(9, 124);
+            this.carsComboBox.Name = "carsComboBox";
+            this.carsComboBox.Size = new System.Drawing.Size(197, 21);
+            this.carsComboBox.TabIndex = 28;
             // 
-            // label12
+            // label15
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(14, 107);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(38, 13);
-            this.label12.TabIndex = 23;
-            this.label12.Text = "Naam:";
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 104);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(32, 13);
+            this.label15.TabIndex = 29;
+            this.label15.Text = "Auto:";
             // 
-            // label13
+            // carSubmitButton
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(14, 127);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(37, 13);
-            this.label13.TabIndex = 24;
-            this.label13.Text = "Adres:";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(14, 147);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(55, 13);
-            this.label14.TabIndex = 25;
-            this.label14.Text = "Postcode:";
-            // 
-            // companyPostalCodeLabel
-            // 
-            this.companyPostalCodeLabel.AutoSize = true;
-            this.companyPostalCodeLabel.Location = new System.Drawing.Point(75, 147);
-            this.companyPostalCodeLabel.Name = "companyPostalCodeLabel";
-            this.companyPostalCodeLabel.Size = new System.Drawing.Size(25, 13);
-            this.companyPostalCodeLabel.TabIndex = 26;
-            this.companyPostalCodeLabel.Text = "<?>";
-            // 
-            // companyAddressLabel
-            // 
-            this.companyAddressLabel.AutoSize = true;
-            this.companyAddressLabel.Location = new System.Drawing.Point(75, 127);
-            this.companyAddressLabel.Name = "companyAddressLabel";
-            this.companyAddressLabel.Size = new System.Drawing.Size(25, 13);
-            this.companyAddressLabel.TabIndex = 27;
-            this.companyAddressLabel.Text = "<?>";
-            // 
-            // companyIdLabel
-            // 
-            this.companyIdLabel.AutoSize = true;
-            this.companyIdLabel.Location = new System.Drawing.Point(75, 87);
-            this.companyIdLabel.Name = "companyIdLabel";
-            this.companyIdLabel.Size = new System.Drawing.Size(25, 13);
-            this.companyIdLabel.TabIndex = 29;
-            this.companyIdLabel.Text = "<?>";
-            // 
-            // companyNameLabel
-            // 
-            this.companyNameLabel.AutoSize = true;
-            this.companyNameLabel.Location = new System.Drawing.Point(75, 107);
-            this.companyNameLabel.Name = "companyNameLabel";
-            this.companyNameLabel.Size = new System.Drawing.Size(25, 13);
-            this.companyNameLabel.TabIndex = 28;
-            this.companyNameLabel.Text = "<?>";
-            // 
-            // ruleId
-            // 
-            this.ruleId.HeaderText = "ruleId";
-            this.ruleId.Name = "ruleId";
-            this.ruleId.ReadOnly = true;
-            this.ruleId.Visible = false;
-            // 
-            // taskAmount
-            // 
-            this.taskAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.taskAmount.HeaderText = "Aantal";
-            this.taskAmount.Name = "taskAmount";
-            this.taskAmount.ReadOnly = true;
-            this.taskAmount.Width = 62;
-            // 
-            // taskDescription
-            // 
-            this.taskDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.taskDescription.HeaderText = "Omschrijving";
-            this.taskDescription.Name = "taskDescription";
-            this.taskDescription.ReadOnly = true;
-            // 
-            // taskPrice
-            // 
-            this.taskPrice.HeaderText = "Prijs per eenheid";
-            this.taskPrice.Name = "taskPrice";
-            this.taskPrice.ReadOnly = true;
-            // 
-            // taskPriceTotal
-            // 
-            this.taskPriceTotal.HeaderText = "Totaal";
-            this.taskPriceTotal.Name = "taskPriceTotal";
-            this.taskPriceTotal.ReadOnly = true;
+            this.carSubmitButton.Location = new System.Drawing.Point(9, 153);
+            this.carSubmitButton.Name = "carSubmitButton";
+            this.carSubmitButton.Size = new System.Drawing.Size(145, 23);
+            this.carSubmitButton.TabIndex = 30;
+            this.carSubmitButton.Text = "Voeg auto toe aan taak";
+            this.carSubmitButton.UseVisualStyleBackColor = true;
+            this.carSubmitButton.Click += new System.EventHandler(this.carSubmitButton_Click);
             // 
             // InvoiceForm
             // 
@@ -517,5 +550,8 @@ namespace FactuurApp
         private System.Windows.Forms.DataGridViewTextBoxColumn taskDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn taskPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn taskPriceTotal;
+        private System.Windows.Forms.Button carSubmitButton;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox carsComboBox;
     }
 }

@@ -17,6 +17,7 @@ namespace FactuurApp
         
         private List<Company> companyList = new();
         private List<Task> tasksList = new();
+        private List<Car> carsList = new();
 
         private DateTime paymentTerm;
         private decimal totalPriceVATExlusive = 0M;
@@ -29,6 +30,7 @@ namespace FactuurApp
             taskDeleteButton.Enabled = false;
             taskSubmitButton.Enabled = false;
         }
+
         private void InvoiceForm_Load(object sender, EventArgs e)
         {
             Database.MakeConnection();
@@ -45,10 +47,14 @@ namespace FactuurApp
                 tasksList = Database.GetAllTasks();
 
                 tasksComboBox.DataSource = tasksList;
-                tasksComboBox.DisplayMember = "Description";
                 tasksComboBox.ValueMember = "Id";
+                tasksComboBox.DisplayMember = "Description";
 
                 tasksComboBox.SelectedIndex = -1;
+
+                carsList = Database.GetAllCars();
+                carsComboBox.DataSource = carsList;
+                carsComboBox.ValueMember = "Id";
 
                 if (invoice == null)
                 {
@@ -91,20 +97,6 @@ namespace FactuurApp
             invoice = Invoice;
         }
 
-        //private void CalculatePrices()
-        //{
-        //    //foreach (DataGridViewRow row in invoiceRulesDataGridView.SelectedRows)
-        //    //{
-        //    //    row.Cells.;
-        //    //}
-
-        //    for(int i = 0; i < invoiceRulesDataGridView.RowCount; i++)
-        //    {
-        //        decimal priceTask = decimal.Parse(invoiceRulesDataGridView.Rows[i].Cells[3].Value.ToString());
-        //        totalPriceVATExlusive += priceTask;
-        //    }
-        //}
-
         private void SetPriceLabels()
         {
             priceVATExclusiveLabel.Text = string.Format("€ {0}", Math.Round(totalPriceVATExlusive, 2));
@@ -138,6 +130,10 @@ namespace FactuurApp
             {
                 taskDeleteButton.Enabled = false;
             }
+        }
+        private void invoiceRulesDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MessageBox.Show("id: " + invoiceRulesDataGridView.CurrentRow.Cells[0].Value.ToString());
         }
 
         private void taskDeleteButton_Click(object sender, EventArgs e)
@@ -194,6 +190,10 @@ namespace FactuurApp
                 taskSubmitButton.Enabled = false;
             }
         }
+        private void carSubmitButton_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void invoiceSubmitButton_Click(object sender, EventArgs e)
         {
@@ -202,11 +202,6 @@ namespace FactuurApp
                 MessageBox.Show("Er zijn geen taken toegewezen!");
                 return;
             }
-        }
-
-        private void invoiceRulesDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            MessageBox.Show("id: " + invoiceRulesDataGridView.CurrentRow.Cells[0].Value.ToString());
         }
     }
 }
